@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Example13 extends JFrame implements ActionListener {
+class Example13 extends JFrame implements ActionListener {
     private JMenuBar bar;
     private JMenu menu;
     private JRadioButtonMenuItem red;
@@ -12,9 +12,9 @@ public class Example13 extends JFrame implements ActionListener {
     public Example13() {
         bar = new JMenuBar();
         menu = new JMenu("Colors");
-        red = JRadioButtonMenuItem("Red");
-        green = JRadioButtonMenuItem("Green");
-        blue = JRadioButtonMenuItem("blue");
+        red = new JRadioButtonMenuItem("Red");
+        green = new JRadioButtonMenuItem("Green");
+        blue = new JRadioButtonMenuItem("Blue");
 
         setLayout(new FlowLayout());
         setSize(300, 250);
@@ -26,10 +26,28 @@ public class Example13 extends JFrame implements ActionListener {
         menu.add(blue);
         
         ButtonGroup group = new ButtonGroup();
+        
+        red.addActionListener(this);
+        green.addActionListener(this);
+        blue.addActionListener(this);
+
         group.add(red);
-        group.add(blue);
         group.add(green);
+        group.add(blue);
         add(bar);
         
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == red) getContentPane().setBackground(Color.RED);
+        if (e.getSource() == green) getContentPane().setBackground(Color.GREEN);
+        if (e.getSource() == blue) getContentPane().setBackground(Color.BLUE);
+    }
+}
+
+public class Test13 {
+    public static void main(String[] args) {
+        Example13 ex = new Example13();
+        ex.setVisible(true);
     }
 }
